@@ -1,0 +1,21 @@
+#!/bin/sh
+
+APP_DIR="/home/hotelissima/apps"
+APP_NAME="hotelissima-play2"
+APP_GIT="/home/hotelissima/git/hotelissima-play2.git"
+BUILD_DIR="/tmp/build"
+
+unset GIT_DIR
+
+read oldrev newrev refname
+if [ $refname = "refs/heads/master" ]; then
+
+        /home/hotelissima/play-build.sh --name=$APP_NAME --build=$BUILD_DIR --path=$APP_DIR --git=$APP_GIT --branch=master --conf=prod.sh
+        if [ $? != 0 ]; then
+                echo "-----> Build failed"
+                exit 1
+        fi
+
+        cd "$BUILD_DIR/$APP_NAME"
+        ./start --deploy
+fi

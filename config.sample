@@ -1,0 +1,8 @@
+Xms=64m
+Xmx=64m
+
+opts=(
+	http.port=9000
+	evolutionplugin=disabled
+	logger.resource=prod-logger.xml
+)
